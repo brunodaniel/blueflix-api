@@ -27,3 +27,6 @@ CREATE TABLE "Filme" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Filme_title_key" ON "Filme"("title");

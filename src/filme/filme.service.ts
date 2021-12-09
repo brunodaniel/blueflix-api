@@ -14,7 +14,7 @@ export class FilmeService {
 
   async create(dadosDoFilme: CreateFilmeDto): Promise<Filme> {
     const filmeExiste = await this.database.filme.findUnique({
-      where: { title: dadosDoFilme },
+      where: { title: dadosDoFilme.title },
     });
 
     if (filmeExiste) {
