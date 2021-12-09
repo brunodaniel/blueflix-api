@@ -14,29 +14,31 @@ import { UpdateFilmeDto } from './dto/update-filme.dto';
 @Controller('filme')
 export class FilmeController {
   constructor(private readonly filmeService: FilmeService) {}
-
-  @Post()
-  create(@Body() createFilmeDto: CreateFilmeDto) {
-    return this.filmeService.create(createFilmeDto);
+  @Post('create')
+  create(@Body() CreateFilmeDto: CreateFilmeDto): Promise<Filme> {
+    return this.filmeService.create(CreateFilmeDto);
   }
 
-  @Get()
-  findAll() {
+  @Get('get-all')
+  findAll(): Promise<Filme[]> {
     return this.filmeService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.filmeService.findOne(+id);
+  @Get('find-one/:id')
+  findOne(@Param('id') id: string): Promise<Filme> {
+    return this.filmeService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFilmeDto: UpdateFilmeDto) {
-    return this.filmeService.update(+id, updateFilmeDto);
+  @Patch('update/:id')
+  update(
+    @Param('id') id: string,
+    @Body() updateFilmeDto: UpdateFilmeDto,
+  ): Promise<Filme> {
+    return this.filmeService.update(id, updateFilmeDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.filmeService.remove(+id);
+  @Delete('delete/:id')
+  remove(@Param('id') id: string): Promise<{ message: string }> {
+    return this.filmeService.remove(id);
   }
 }

@@ -2,16 +2,14 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './user/user.module';
-import { FilmesModule } from './filmes/filme.module';
 import { FilmeController } from './filme/filme.controller';
 import { FilmeService } from './filme/filme.service';
 import { FilmeModule } from './filme/filme.module';
-import { PlantModule } from './plant/plant.module';
-import { FilmeModule } from './filme/filme.module';
+import { PrismaService } from './prisma.service';
 
 @Module({
-  imports: [UsersModule, FilmesModule, FilmeModule, PlantModule],
+  imports: [UsersModule, FilmeModule],
   controllers: [AppController, FilmeController],
-  providers: [AppService, FilmeService],
+  providers: [AppService, FilmeService, PrismaService],
 })
 export class AppModule {}
