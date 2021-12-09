@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateFilmeDto } from './dto/create-filme.dto';
 import { UpdateFilmeDto } from './dto/update-filme.dto';
@@ -9,7 +13,15 @@ export class FilmeService {
   constructor(private database: PrismaService) {}
 
   async create(dadosDoFilme: CreateFilmeDto): Promise<Filme> {
-    return 'This action adds a new filme';
+    const filmeExiste = await this.database.filme.findUnique({
+      where: { title: dadosDoFilme },
+    });
+
+    if (filmeExiste) {
+      throw new ConflictException('Esse filme já está cadastrado no sistema');
+    }
+    const filme = await this.database.filme.create({ data: dadosDoFilme });
+    return filme;
   }
 
   findAll() {

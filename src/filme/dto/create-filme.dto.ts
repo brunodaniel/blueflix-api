@@ -15,7 +15,7 @@ export class CreateFilmeDto {
 
   @IsString()
   @IsNotEmpty()
-  yearRelease: number;
+  yearRelease: string;
 
   @IsString()
   @IsNotEmpty()
