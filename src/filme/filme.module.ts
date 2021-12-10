@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma.service';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
+  imports: [PassportModule.register({ defaultStrategy: 'jwt' })],
   controllers: [FilmeController],
   providers: [FilmeService, PrismaService],
 })

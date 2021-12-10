@@ -19,6 +19,7 @@ CREATE TABLE "Filme" (
     "director" TEXT NOT NULL,
     "yearRelease" TEXT NOT NULL,
     "linkImg" TEXT NOT NULL,
+    "watched" BOOLEAN NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

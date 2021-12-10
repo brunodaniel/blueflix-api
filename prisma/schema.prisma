@@ -27,6 +27,7 @@ model Filme {
   director    String
   yearRelease String
   linkImg     String
+  watched     Boolean
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
