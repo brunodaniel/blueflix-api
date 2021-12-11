@@ -94,4 +94,27 @@ export class UserService {
       message: 'Id foi encontrado e deletado com sucesso',
     };
   }
+  async addList(user: User, filmeId: string) {
+    const filme = await this.database.filme.findUnique({
+      where: { id: filmeId },
+    });
+    if (!filme) {
+      throw new NotFoundException('Filme não encontrado');
+    }
+    const usuario = await this.database.user.update({
+      where: { id: user.id },
+      data: {
+        filmes: {
+          connect: {
+            id: filme.id,
+          },
+        },
+      },
+      include: {
+        filmes: true,
+      },
+    });
+    delete usuario.password;
+    return usuario;
+  }
 }

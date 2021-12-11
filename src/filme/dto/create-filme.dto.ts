@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsBoolean } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateFilmeDto {
   @IsString()
@@ -20,8 +20,4 @@ export class CreateFilmeDto {
   @IsString()
   @IsNotEmpty()
   linkImg: string;
-
-  @IsBoolean()
-  @IsNotEmpty()
-  watched: boolean;
 }

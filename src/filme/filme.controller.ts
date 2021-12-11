@@ -14,10 +14,10 @@ import { UpdateFilmeDto } from './dto/update-filme.dto';
 import { Filme } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 
-@UseGuards(AuthGuard())
 @Controller('filme')
 export class FilmeController {
   constructor(private readonly filmeService: FilmeService) {}
+
   @Post('create')
   create(@Body() CreateFilmeDto: CreateFilmeDto): Promise<Filme> {
     return this.filmeService.create(CreateFilmeDto);
@@ -28,11 +28,13 @@ export class FilmeController {
     return this.filmeService.findAll();
   }
 
+  @UseGuards(AuthGuard())
   @Get('find-one/:id')
   findOne(@Param('id') id: string): Promise<Filme> {
     return this.filmeService.findOne(id);
   }
 
+  @UseGuards(AuthGuard())
   @Patch('update/:id')
   update(
     @Param('id') id: string,
@@ -41,6 +43,7 @@ export class FilmeController {
     return this.filmeService.update(id, updateFilmeDto);
   }
 
+  @UseGuards(AuthGuard())
   @Delete('delete/:id')
   remove(@Param('id') id: string): Promise<{ message: string }> {
     return this.filmeService.remove(id);
